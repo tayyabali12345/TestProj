@@ -25,6 +25,12 @@
       <tr>
         <td><%= comment.content %></td>
         <td><%= comment.user.email %></td>
+        <td>
+        <%= link_to comment.reactions.where(like: true).count, like_post_comment_path(@post, comment), method: :post, remote: true %>
+        </td>
+        <td>
+        <%= link_to comment.reactions.where(like: false).count, dislike_post_comment_path(@post, comment), method: :post, remote: true %>
+        </td>
       </tr>
     <% end %>
   </tbody>

@@ -47,7 +47,29 @@ class CommentsController < ApplicationController
     end
   end
 
+  def like
+    toogle_reaction(true)
+  end
+
+  def dislike
+    toogle_reaction(false)
+  end
+
   private
+
+    def toogle_reaction(reaction_type)
+      @comment = Comment.find(params[:id])
+      existing_reaction = Reaction.find_by(user_id: current_user.id, likeable_id: @comment.id)
+      if existing_reaction && existing_reaction.like == reaction_type
+        existing_reaction.destroy
+      elsif existing_reaction==nil
+        @comment.reactions.create(user_id: current_user.id, like: reaction_type)
+      else
+        @comment.reactions.update(like: reaction_type)
+      end
+      redirect_to post_path(@comment.post)
+    end
+
     def set_comment
       @comment = Comment.find(params[:id])
     end
