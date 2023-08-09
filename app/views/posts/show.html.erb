@@ -1,0 +1,42 @@
+
+<p>
+  <strong>Title:</strong>
+  <%= @post.title %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @post.body %>
+</p>
+
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Posted by</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @posted_comments.each do |comment| %>
+      <tr>
+        <td><%= comment.content %></td>
+        <td><%= comment.user.email %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+<%= form_with(model: [@post, @post.comments.build], url: post_comments_path(@post)) do |form| %>
+  <%= form.text_area :content, placeholder: 'Enter your comment' %>
+  <%= form.submit 'Add Comment' %>
+<% end %>
+
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>
