@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: %i[ show edit update destroy ]
+  before_action :set_comment, only: %i[ show edit update destroy like dislike ]
 
   def index
     @comments = Comment.all
@@ -49,16 +49,17 @@ class CommentsController < ApplicationController
 
   def like
     toogle_reaction(true)
+    redirect_to post_path(@comment.post)
   end
 
   def dislike
     toogle_reaction(false)
+    redirect_to post_path(@comment.post)
   end
 
   private
 
     def toogle_reaction(reaction_type)
-      @comment = Comment.find(params[:id])
       existing_reaction = Reaction.find_by(user_id: current_user.id, likeable_id: @comment.id)
       if existing_reaction && existing_reaction.like == reaction_type
         existing_reaction.destroy
@@ -67,7 +68,6 @@ class CommentsController < ApplicationController
       else
         @comment.reactions.update(like: reaction_type)
       end
-      redirect_to post_path(@comment.post)
     end
 
     def set_comment

@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :set_post, only: %i[ show edit update destroy like dislike ]
 
   def index
     @posts = Post.includes(:reactions).all
@@ -49,16 +49,17 @@ class PostsController < ApplicationController
 
   def like
     toogle_reaction(true)
+    redirect_to posts_url
   end
 
   def dislike
     toogle_reaction(false)
+    redirect_to posts_url
   end
 
   private
 
     def toogle_reaction(reaction_type)
-      @post = Post.find(params[:id])
       existing_reaction = Reaction.find_by(user_id: current_user.id, likeable_id: @post.id)
       if existing_reaction && existing_reaction.like == reaction_type
         existing_reaction.destroy
@@ -67,7 +68,6 @@ class PostsController < ApplicationController
       else
         @post.reactions.update(like: reaction_type)
       end
-      redirect_to posts_url
     end
 
     def set_post
