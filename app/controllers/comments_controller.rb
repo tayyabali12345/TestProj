@@ -1,9 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: %i[ show destroy ]
+  before_action :set_comment, only: :destroy ]
   before_action :set_post, only: %i[ create destroy ]
-
-  def show
-  end
 
   def create
     @comment = @post.comments.build(comment_params)
