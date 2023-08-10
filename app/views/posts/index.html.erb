@@ -12,7 +12,7 @@
   </thead>
 
   <tbody>
-    <%= render partial: "post", collection: @posts %>
+    <%= render partial: "post", collection: @posts, locals: { posts: @posts }  %>
   </tbody>
 </table>
 
