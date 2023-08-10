@@ -21,12 +21,7 @@
   </thead>
 
   <tbody>
-    <% @posted_comments.each do |comment| %>
-      <tr>
-        <td><%= comment.content %></td>
-        <td><%= comment.user.email %></td>
-      </tr>
-    <% end %>
+    <%= render partial: "comment", collection: @posted_comments , locals: { post_id: @post.id } %>
   </tbody>
 </table>
 
