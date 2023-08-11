@@ -60,7 +60,7 @@ class PostsController < ApplicationController
   private
 
     def toogle_reaction(reaction_type)
-      existing_reaction = Reaction.find_by(user_id: current_user.id, likeable_id: @post.id)
+      existing_reaction = Reaction.find_by(user_id: current_user.id, likeable_id: @post.id, likeable_type: "Post")
       if existing_reaction && existing_reaction.like == reaction_type
         existing_reaction.destroy
       elsif existing_reaction==nil

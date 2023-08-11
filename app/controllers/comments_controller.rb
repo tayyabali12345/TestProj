@@ -60,7 +60,7 @@ class CommentsController < ApplicationController
   private
 
     def toogle_reaction(reaction_type)
-      existing_reaction = Reaction.find_by(user_id: current_user.id, likeable_id: @comment.id)
+      existing_reaction = Reaction.find_by(user_id: current_user.id, likeable_id: @comment.id, likeable_type: "Comment")
       if existing_reaction && existing_reaction.like == reaction_type
         existing_reaction.destroy
       elsif existing_reaction==nil
