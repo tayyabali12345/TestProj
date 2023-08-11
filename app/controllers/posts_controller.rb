@@ -1,12 +1,12 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :set_post, only: %i[show edit update destroy ]
 
   def index
     @posts = Post.all
   end
 
   def show
-    @posted_comments=@post.comments
+    @posted_comments=@post.comments.includes(:user)
   end
 
   def new
@@ -28,7 +28,7 @@ class PostsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @post.update(post_params)
+      if @post.nil? || @post.update(post_params)
         format.html { redirect_to post_url(@post), notice: t('notice') }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class PostsController < ApplicationController
 
   def destroy
     respond_to do |format|
-      if @post.destroy
+      if @post.nil? || @post.destroy
         format.html { redirect_to posts_url, notice: t('notice') }
       else
         format.html { redirect_to posts_url, status: :unprocessable_entity }
