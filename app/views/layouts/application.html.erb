@@ -7,11 +7,28 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag "image_preview" %>
   </head>
 
   <body>
-        <% if notice %> <p class="alert alert-success"><%= notice %></p> <% end %>
-  <% if alert %> <p class="alert alert-danger"><%= alert %></p> <% end %>
+    <% if notice %> <p class="alert alert-success"><%= notice %></p> <% end %>
+    <% if alert %> <p class="alert alert-danger"><%= alert %></p> <% end %>
+
+    <% if user_signed_in? %>
+      <div class="row">
+        <div class="d-flex justify-content-end">
+          <%= link_to 'logout',  destroy_user_session_path, :class => 'btn btn-danger', method: :delete %>
+          <%= link_to 'Edit Profile',  edit_user_registration_path, :class => 'btn btn-warning'%>
+        </div>
+      </div>
+    <%else%>
+      <div class="row">
+        <div class="d-flex justify-content-end">
+          <%= link_to 'Login',  new_user_session_path, :class => 'btn btn-danger' %>
+        </div>
+      </div>
+    <% end %>
+
     <%= yield %>
 
   </body>
