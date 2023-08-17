@@ -25,6 +25,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'faker'
   gem 'rails-controller-testing'
+  #gem 'active_storage_validations', '~> 0.9.8'
+  gem 'jsonapi-serializer'
 end
 
 group :test do
