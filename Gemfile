@@ -59,9 +59,14 @@ group :development do
     gem 'rubocop-minitest'
     gem 'rubocop-performance'
     gem 'rubocop-rails'
+    gem 'dotenv-rails'
   end
 
   gem 'rack-cors'
   gem 'active_model_serializers', '~> 0.10.2'
 end
 
+
+gem "graphql", "~> 2.0"
+
+gem 'graphiql-rails', github: "rmosolgo/graphiql-rails", group: :development

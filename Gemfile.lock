@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/rmosolgo/graphiql-rails.git
+  revision: f47d94019052752f364aeaed8343046a319afdd1
+  specs:
+    graphiql-rails (1.9.0)
+      railties
+      sprockets-rails
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -109,6 +117,10 @@ GEM
     docile (1.4.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     erubi (1.12.0)
     execjs (2.8.1)
     factory_bot (6.2.1)
@@ -121,6 +133,7 @@ GEM
     ffi (1.15.5)
     globalid (1.1.0)
       activesupport (>= 5.0)
+    graphql (2.0.26)
     http-accept (1.7.0)
     http-cookie (1.0.5)
       domain_name (~> 0.5)
@@ -393,8 +406,11 @@ DEPENDENCIES
   cloudinary
   coffee-rails (~> 4.2)
   devise
+  dotenv-rails
   factory_bot_rails
   faker
+  graphiql-rails!
+  graphql (~> 2.0)
   image_processing
   jbuilder (~> 2.5)
   jquery-rails (~> 4.3, >= 4.3.3)
